@@ -13,10 +13,13 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-/*Route::get('/', function () {
-    return view('welcome');
-});*/
+//トーク画面
+Route::middleware(['auth:sanctum', 'verified'])->get('/chat', function () {
+    return view('chat/talk');
+})->name('talk');
 
-Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
-    return view('dashboard');
-})->name('dashboard');
+//コメント登録処理
+Route::post('/send', 'CommentController@store')->name('send');
+
+//非同期通信処理
+Route::get('/result/ajax', 'CommentController@getData');
