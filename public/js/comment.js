@@ -17,7 +17,7 @@ function get_data() {
                                 <div class="media-body comment-body">
                                     <div class="row">
                                         <span class="comment-body-user" id="name">${data.comments[i].name}</span>
-                                        <span class="comment-body-time" id="created_at">${data.comments[i].created_at}</span>
+                                        <span class="comment-body-time" id="created_at">${data.comments[i].created_at}  <a href="edit${data.comments[i].comment_id}">編集</a> <a href="/delate/comment${data.comments[i].comment_id}">削除</a></span>
                                     </div>
                                     <span class="comment-body-content" id="comment">${data.comments[i].comment}</span>
                                 </div>

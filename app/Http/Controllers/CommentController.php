@@ -13,7 +13,7 @@ class CommentController extends Controller
     {
         // 現在ログインしているユーザーのID取得
         $user_id = Auth::id();
-        //コメントと投稿者名を取得
+        //コメント件数取得
         $comments = new Comment;
         $comments = Comment::select('comment_id')->where('user_id', $user_id)->where('del_flg', '0')->count();
 
@@ -41,6 +41,26 @@ class CommentController extends Controller
         $comment->comment = $request->input('comment');
         $comment->save();
         
+        return redirect()->route('talk');
+    }
+
+    //コメント編集画面表示
+    public function edit($comment_id){
+        $comment = new Comment;
+        $comment = Comment::select('comment_id','comment','created_at')
+                    ->where('comment_id', $comment_id)
+                    ->get();
+
+        return view('chat.edit', ['comment' => $comment]);
+    }
+
+    //コメント編集処理
+    public function update(Request $request,$comment_id){
+        $comment = new Comment;
+        $comment = Comment::find($comment_id);
+        $comment->comment = $request-> input('comment');
+        $comment->save();
+
         return redirect()->route('talk');
     }
 
