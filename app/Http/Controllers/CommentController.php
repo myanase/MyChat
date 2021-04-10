@@ -20,7 +20,7 @@ class CommentController extends Controller
         //1件以上だった場合、コメントと投稿者名を取得
         if($comments > 0){
             $comments = Comment::join('users', 'users.id', '=', 'comments.user_id')
-                ->select('users.name', 'comments.comment', 'comments.created_at')
+                ->select('comments.comment_id','users.name', 'comments.comment', 'comments.created_at')
                 ->where('comments.user_id', $user_id)
                 ->where('comments.del_flg', '0')
                 ->orderBy('comment_id', 'desc')
@@ -39,6 +39,16 @@ class CommentController extends Controller
         $comment = new Comment;
         $comment->user_id = $user_id;
         $comment->comment = $request->input('comment');
+        $comment->save();
+        
+        return redirect()->route('talk');
+    }
+
+    //コメント削除(論理削除)
+    public function delate($comment_id){
+        $comment = new Comment;
+        $comment = Comment::find($comment_id);
+        $comment->del_flg = 1;
         $comment->save();
         
         return redirect()->route('talk');

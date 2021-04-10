@@ -13,6 +13,9 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+/*
+ * トーク画面
+ */
 //トーク画面
 Route::middleware(['auth:sanctum', 'verified'])->get('/chat', function () {
     return view('chat/talk');
@@ -21,5 +24,8 @@ Route::middleware(['auth:sanctum', 'verified'])->get('/chat', function () {
 //コメント登録処理
 Route::post('/send', 'CommentController@store')->name('send');
 
-//非同期通信処理
+//コメント表示用非同期通信処理
 Route::get('/result/ajax', 'CommentController@getData');
+
+//コメント削除処理
+Route::get('/delate/comment{comment_id}', 'CommentController@delate');
