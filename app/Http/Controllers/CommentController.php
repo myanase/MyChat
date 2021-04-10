@@ -25,10 +25,10 @@ class CommentController extends Controller
                 ->where('comments.del_flg', '0')
                 ->orderBy('comment_id', 'desc')
                 ->get();
-            $json = ["comments" => $comments];
-            return response()->json($json);
         }
-    }
+        $json = ["comments" => $comments];
+        return response()->json($json);
+}
 
     //コメント登録
     public function store(Request $request){

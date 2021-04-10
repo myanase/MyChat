@@ -1,5 +1,7 @@
 <x-app-layout>
-    <x-slot name="header"></x-slot>
+    <x-slot name="header">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    </x-slot>
 
     <script src="{{ asset('js/comment.js') }}"></script>
 

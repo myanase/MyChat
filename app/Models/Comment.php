@@ -14,4 +14,8 @@ class Comment extends Model
     protected $guarded = [
         'comment_id','created_at', 'updated_at'
     ];
+
+    protected $casts = [
+        'created_at' => 'datetime:Y-m-d H:i:s',
+    ];
 }
